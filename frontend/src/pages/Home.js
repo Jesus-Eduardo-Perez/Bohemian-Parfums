@@ -1,9 +1,9 @@
 import React from "react";
-
+import FrontPage from '../Assets/FrontPage.png'
 function Home() {
     return(
         <div>
-            <h1>Imagen de perfumes</h1>
+            <img src={FrontPage} alt="Front Page"/>
         </div>
     )
 }

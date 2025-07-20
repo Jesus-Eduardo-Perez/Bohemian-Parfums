@@ -1,10 +1,11 @@
 import React from "react";
 import Styles from '../css_components/Header.module.css'
+import { CiSearch, CiUser, CiShoppingCart } from "react-icons/ci";
 function Header(){
     
     return (
         <div className = {Styles.main_container}>
-             <div>
+             <div className={Styles.logo}>
                  <h1>Bohemian <br/> Parfums</h1>
              </div>
              <div className= {Styles.nav_container}>
@@ -16,8 +17,10 @@ function Header(){
                     <a href="/#">MUJER</a>
                  </nav>
              </div>
-             <div>
-                <h1>ICONOS</h1>
+             <div className = {Styles.icons}>
+                <CiSearch className = {Styles.icon}/>
+                <CiUser className = {Styles.icon}/>
+                <CiShoppingCart className = {Styles.icon}/>
              </div>
         </div>
     )
