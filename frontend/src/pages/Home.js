@@ -1,9 +1,13 @@
 import React from "react";
-import FrontPage from '../Assets/FrontPage.png'
+import FrontPage from '../Assets/FrontPage.jpg'
+import Styles from '../css_components/Home.module.css'
 function Home() {
     return(
         <div>
-            <img src={FrontPage} alt="Front Page"/>
+            <div className={Styles.image_container}>
+                <img src={FrontPage} alt="Front Page"/>
+            </div>
+            
         </div>
     )
 }
