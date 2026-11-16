@@ -10,7 +10,7 @@ function Header(){
              <div className= {Styles.nav_container}>
                  <nav className= {Styles.nav}>
                     <IoIosMenu className={Styles.icon} />
-                    <a href="/#">Menú</a>
+                    <p>Menú</p>
                  </nav>
              </div>
              <div className={Styles.logo}>

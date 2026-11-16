@@ -33,7 +33,7 @@
     align-items: center;
     justify-content:space-evenly;
 }
-.nav a {
+.nav p {
     font-size: 24px;
     font-family: 'Julius Sans One', sans-serif;
     text-decoration: none;
