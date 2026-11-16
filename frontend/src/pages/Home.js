@@ -3,7 +3,7 @@ import FrontPage from '../Assets/FrontPage.jpg'
 import Styles from '../css_components/Home.module.css'
 function Home() {
     return(
-        <div>
+        <div className={Styles.container}>
             <section className={Styles.front_container}>
                 <img src={FrontPage} alt="Front Page"/>
                 <div className={Styles.front_text}>
@@ -13,8 +13,9 @@ function Home() {
                     <p>Diseñador 100% Originales.</p>
                 </div>                
             </section> 
-            <div>
-                <h1>Perumes más vendidos</h1>
+            <div className={Styles.top_section_header}>
+                <p>Perfumes</p>
+                <h1>Perfumes más vendidos</h1>
             </div>          
         </div>
     )

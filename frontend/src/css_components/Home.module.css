@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+.container{
+  font-family: "Outfit", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+}
 .front_container {
   position: relative;
   width: 100%;
@@ -12,11 +19,29 @@
   display: block;
 }
 .front_text {
-  font-family: "Outfit", sans-serif;
   position: absolute;
   bottom: 40%;
   left: 3%;
   color: white;
   z-index: 2;
   font-size: 32px;
+}
+.top_section_header {
+  display: flex;
+  flex-direction: column;
+  align-items:start;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  height: 15vh;
+  padding-left: 5%;
+}
+.top_section_header p{
+  color: grey;
+  font-weight: 300;
+}
+.top_section_header h1 {
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.2;
 }
