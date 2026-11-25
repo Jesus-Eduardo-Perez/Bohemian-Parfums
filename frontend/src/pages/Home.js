@@ -1,6 +1,8 @@
 import React from "react";
 import FrontPage from '../Assets/FrontPage.jpg'
 import Styles from '../css_components/Home.module.css'
+import ProductSection from "../components/ProductSection/ProductSection";
+import products from "../Data/products";
 function Home() {
     return(
         <div className={Styles.container}>
@@ -13,10 +15,11 @@ function Home() {
                     <p>Diseñador 100% Originales.</p>
                 </div>                
             </section> 
-            <div className={Styles.top_section_header}>
-                <p>Perfumes</p>
-                <h1>Perfumes más vendidos</h1>
-            </div>          
+            <ProductSection
+                subtitle="Perfumes"
+                title="Perfumes más vendidos"
+                products={products}
+            />
         </div>
     )
 }

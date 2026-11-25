@@ -1,0 +1,24 @@
+.product_section {
+    width: 100%;
+    padding: 30px 5%;
+}
+
+.section_header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.section_header p {
+    color: grey;
+    font-size: 14px;
+    margin: 0;
+}
+
+.section_header h2 {
+    font-size: 28px;
+    font-weight: 400;
+    margin: 0;
+}
