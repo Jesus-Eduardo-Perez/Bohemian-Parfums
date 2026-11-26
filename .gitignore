@@ -1,0 +1,14 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno
+.env
+.env.*
+
+# Archivos de compilación
+build/
+dist/
+
+# Archivos subidos localmente
+backend/uploads/*
+!backend/uploads/.gitkeep
