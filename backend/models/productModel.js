@@ -221,7 +221,81 @@ const Product = {
         );
 
         return result.affectedRows;
+    },
+// Buscar un producto por su ID
+async findById(id) {
+    const [rows] = await pool.execute(
+        `SELECT id, name, slug
+         FROM products
+         WHERE id = ?`,
+        [id]
+    );
+
+    return rows[0] || null;
+},
+
+// Agregar varias imágenes a un producto
+async addImages(productId, images) {
+
+    const connection = await pool.getConnection();
+
+    try {
+        await connection.beginTransaction();
+
+        // Consultar cuántas imágenes tiene actualmente
+        const [existingImages] = await connection.execute(
+            `SELECT COUNT(*) AS total
+             FROM product_images
+             WHERE product_id = ?`,
+            [productId]
+        );
+
+        const currentTotal = Number(existingImages[0].total);
+
+        const insertedImages = [];
+
+        for (let i = 0; i < images.length; i++) {
+
+            const image = images[i];
+
+            const isPrimary = currentTotal === 0 && i === 0;
+
+            const position = currentTotal + i;
+
+            const [result] = await connection.execute(
+                `INSERT INTO product_images
+                 (product_id, image_url, is_primary, position)
+                 VALUES (?, ?, ?, ?)`,
+                [
+                    productId,
+                    image.image_url,
+                    isPrimary,
+                    position
+                ]
+            );
+
+            insertedImages.push({
+                id: result.insertId,
+                image_url: image.image_url,
+                is_primary: isPrimary,
+                position
+            });
+        }
+
+        await connection.commit();
+
+        return insertedImages;
+
+    } catch (error) {
+
+        await connection.rollback();
+
+        throw error;
+
+    } finally {
+        connection.release();
     }
+},
 
 };
 

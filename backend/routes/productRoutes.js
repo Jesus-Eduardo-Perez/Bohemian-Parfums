@@ -1,7 +1,7 @@
 
 const express = require("express");
 const router = express.Router();
-
+const upload = require("../config/multer");
 const productController = require("../controllers/productController");
 
 // Consultas públicas
@@ -14,4 +14,10 @@ router.post("/", productController.createProduct);
 router.put("/:id", productController.updateProduct);
 router.delete("/:id", productController.deleteProduct);
 
+//Carga de imágenes
+router.post(
+    "/:id/images",
+    upload.array("images", 5),
+    productController.uploadProductImages
+);
 module.exports = router;

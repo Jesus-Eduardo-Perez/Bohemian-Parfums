@@ -6,9 +6,10 @@ const cors = require("cors");
 const pool = require("./config/db");
 
 const app = express();
-
 const productRoutes = require("./routes/productRoutes");
 const brandRoutes = require("./routes/brandRoutes");
+
+const path = require("path");
 // Middlewares
 app.use(cors({
     origin: process.env.FRONTEND_URL
@@ -18,6 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/products", productRoutes);
 app.use("/api/brands", brandRoutes);
+
+app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "uploads"))
+);
 // Ruta de prueba
 app.get("/api/health", (req, res) => {
     res.status(200).json({

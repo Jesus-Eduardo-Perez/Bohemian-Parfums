@@ -1,6 +1,7 @@
 
 const Product = require("../models/productModel");
-
+const fs = require("fs");
+const path = require("path");
 // Generar un slug a partir del nombre del producto
 function generateSlug(name) {
     return name
@@ -378,6 +379,80 @@ exports.deleteProduct = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Error al eliminar el producto"
+        });
+    }
+};
+
+// Agregar imágenes a un producto existente
+exports.uploadProductImages = async (req, res) => {
+
+    const files = req.files || [];
+
+    try {
+
+        const { id } = req.params;
+        const numericId = Number(id);
+
+        if (!Number.isInteger(numericId) || numericId <= 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Identificador de producto no válido"
+            });
+        }
+
+        if (files.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Debes seleccionar al menos una imagen"
+            });
+        }
+
+        const product = await Product.findById(numericId);
+
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Producto no encontrado"
+            });
+        }
+
+        const images = files.map(file => ({
+            image_url: `/uploads/products/${file.filename}`
+        }));
+
+        const savedImages = await Product.addImages(
+            numericId,
+            images
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Imágenes guardadas correctamente",
+            data: savedImages
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        // Eliminar archivos físicos si falla el registro en MySQL
+        for (const file of files) {
+            fs.unlink(
+                file.path,
+                (unlinkError) => {
+                    if (unlinkError) {
+                        console.error(
+                            "Error al eliminar archivo:",
+                            unlinkError.message
+                        );
+                    }
+                }
+            );
+        }
+
+        res.status(500).json({
+            success: false,
+            message: "Error al guardar las imágenes"
         });
     }
 };
